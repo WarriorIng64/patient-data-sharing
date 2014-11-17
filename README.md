@@ -14,6 +14,12 @@ This requires handling CSV data files and utilizing SHA hashing.
 ## Technical details ##
 These programs are implemented using Python 2.7.
 
+There are three programs included in this project:
+
+1. `prepare_request.py` handles sub-assignments 1 and 2.
+1. `make_reply.py` handles sub-assignments 3 and 4.
+1. `calculate_percentages.py` handles sub-assignment 5.
+
 ## License ##
 GNU GPLv3
 
