@@ -21,6 +21,6 @@ There are three programs included in this project:
 1. `calculate_percentages.py` handles sub-assignment 5.
 
 ## License ##
-GNU GPLv3
+[GNU GPLv3](http://www.gnu.org/copyleft/gpl.html#content)
 
 [1]: http://medicalopensource.net/mcs5603/recap.html#L11
