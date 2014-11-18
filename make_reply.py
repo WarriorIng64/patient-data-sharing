@@ -86,7 +86,7 @@ with open(args.outfile, 'w') as f:
     # Write back out the contents of our reply
     f.write('"resid","grade","nodesexam","nodespos","extent","nodalstatus","size","pgr","er"\n')
     for row in pathology_data:
-        f.write('"{}","{}","{}","{}","{}","{}","{}","{}","{}"\n'.format(
+        f.write('"{}",{},{},{},{},{},{},{},{}\n'.format(
                 row['resid'],
                 row['grade'],
                 row['nodesexam'],
