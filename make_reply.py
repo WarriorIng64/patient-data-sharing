@@ -95,5 +95,5 @@ with open(args.outfile, 'w') as f:
                 row['nodalstatus'],
                 row['size'],
                 row['pgr'],
-                row['er']]))
+                row['er']))
 exit(0)
