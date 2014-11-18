@@ -65,4 +65,82 @@ optional arguments:
                         Output file name. Use standard output if omitted.
 christopher@ArcticThunder:~/patient-data-sharing$ 
 
+Test Run 5: make_request for patients aged 24 to 26 years
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python make_request.py test/bcs.txt test/bcs-backlink.txt 24 26
+christopher@ArcticThunder:~/patient-data-sharing$ 
 
+Contents of request.txt:
+"resid","hash"
+"bcs658","512c6d1c88b6ee8d4302f2c699e3aa700e8029af5b28a92a18f707419b4088ee"
+"bcs2857","016d20742382ff7cbec18eed207f7c57036c373ba4ae2cef8f27565c4a21861f"
+"bcs2882","79ee1f77dba6bfcf8983b5360352b080aea2821c51c2bfc521dc3c33847d1ff0"
+"bcs3561","c36ee0b54313589d038b433c2fda42178e49b2c69ade0adf712427d8b6a0979a"
+"bcs3716","6117cd9ce998d6e0d84c95b40aceb393553776d94b10d7bcbdf301e1d4fc4270"
+"bcs3726","2239d98d6d23350affc178cacbc56174a626b11ed9e1e16679a02fb320a0b50f"
+"bcs4238","68b6502d538097fb13534e6073fd5e9415e38c1c1b7a2e193d18af7459688b94"
+"bcs7241","217ee65b9bd6439d019f71fc8c21685e43efd053798b4d20c9a2e502a6fe95e1"
+"bcs8316","cb1ded36a267a3443f11b5322849423674341f92f67950c04b2a186f96bd80c4"
+"bcs9475","8e2c63b9db3cb3529d93ac67adac77c5d5b3083be0d416009baf529513ce8323"
+"bcs9950","4eefee0d214cf105b0c5f3914540324830f41e79e22dc858d37acad4bc133e7b"
+"bcs10225","a0126f5fb8997789c5df0c3f1225cef460008be90086599ac2e8ee72462fa5ac"
+"bcs10746","2ae6b2d54d39a7f16e13a99512c6312f7725992d7959f914ef98d51659cdbdfd"
+"bcs11063","df0b400b90d9e4f2da7ceb272c7b67b19e2024a7d3068e63c0123e2b52df35e7"
+"bcs11970","746808905bb22396b1b63cf51da592c353c98c6860d7196e667fda74ff0a8d78"
+"bcs12208","12227d95e85775544e1e45f2cdf95c6917d5ae4d8e47ab5eb3ecc259c4088aab"
+"bcs13021","cc3e0c5c25a5c9caedaf01e2a7b9ebf71856db575a05bd6513eb2bcafd69eddc"
+"bcs13504","36ad7bee5220deb91a11ad445feffd1e56a8b65db2879260c016c50441a0f925"
+"bcs14271","e5c49aee4826abbc0364154be74a71c47ec6835a49d82540cc354e99a9c5481a"
+"bcs14844","02963dd4986febb7386860bf4ecbb5735f98811e849d64c068ef16d74e1b8bcc"
+"bcs15343","7904577d3af457f7a474c7f6c777cfa6f8f780e31c281587711b2ef5fc03e076"
+
+Test Run 6: Running make_reply using previous output from Test Run 5
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python make_reply.py request.txt test/master-backlink.txt test/master-pathology.txt 
+christopher@ArcticThunder:~/patient-data-sharing$ 
+
+Contents of reply.txt:
+"resid","grade","nodesexam","nodespos","extent","nodalstatus","size","pgr","er"
+"bcs9475",3,15,0,10,0,6,3,2
+"bcs7241",3,15,0,10,0,9,3,2
+"bcs13021",2,9,0,10,0,16,1,1
+"bcs3716",3,21,0,10,0,50,2,2
+"bcs10746",2,27,24,10,6,90,1,1
+"bcs658",2,13,1,10,6,22,1,1
+"bcs14271",3,21,0,10,0,15,1,2
+"bcs11970",2,13,0,10,0,17,1,1
+"bcs14844",2,18,10,10,4,35,1,1
+"bcs13504",3,36,0,10,0,15,1,1
+"bcs12208",3,14,8,10,6,50,1,1
+"bcs9950",3,11,1,10,6,30,1,1
+"bcs4238",3,14,4,10,6,25,1,1
+"bcs3726",2,10,0,10,0,20,1,2
+"bcs2882",3,29,9,10,6,22,1,1
+"bcs2857",2,9,0,10,0,17,2,1
+"bcs11063",3,29,11,10,6,40,1,1
+"bcs8316",4,8,0,10,0,15,2,2
+"bcs10225",3,24,3,10,6,25,1,1
+"bcs15343",3,14,0,10,0,10,2,2
+"bcs3561",3,15,0,10,0,45,2,1
+
+Test Run 7: Running calculate_percentage using previous output from Test Run 6
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python calculate_percentage.py reply.txt
+21 total patients were examined.
+19.05% are negative for only estrogen receptors.
+9.52% are negative for only progesterone receptors..
+42.86% are negative for either estrogen or progesterone receptors, or both.
+57.14% are negative for neither estrogen nor progesterone receptors.
+christopher@ArcticThunder:~/patient-data-sharing$ 
+
+Test Run 8: Same as Test Run 7, but specifying an output file
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python calculate_percentage.py reply.txt -o percentages.txt
+christopher@ArcticThunder:~/patient-data-sharing$ 
+
+Contents of percentages.txt:
+21 total patients were examined.
+19.05% are negative for only estrogen receptors.
+9.52% are negative for only progesterone receptors..
+42.86% are negative for either estrogen or progesterone receptors, or both.
+57.14% are negative for neither estrogen nor progesterone receptors.
