@@ -36,7 +36,8 @@ parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=desc
             )
-parser.add_argument("infile", help="Input request file.")
+parser.add_argument("bcs", help="Input bcs file.")
+parser.add_argument("bcs_backlink", help="Input bcs-backlink file.")
 parser.add_argument("lower_age",
                     type=int,
                     help="Low end of age range (inclusive).")
@@ -49,10 +50,32 @@ parser.add_argument("-o",
                     help="Output request file name (default: request.txt).")
 args = parser.parse_args()
 
-if os.path.exists(args.infile):
-    # Read in file contents
-    # TODO
-    exit(0)
-else
-    print "Error: {} does not exist".format(args.infile)
-    exit(1)
+suite.check_file_exists(args.bcs)
+suite.check_file_exists(args.bcs_backlink)
+
+# Read in bcs.txt file contents
+bcs_rows = []
+bcs_backlink_rows = []
+outrows = []
+# Find research ID's corresponding to age range
+with open(args.bcs, 'r') as b:
+    reader = csv.DictReader(b)
+    for row in reader:
+        # Don't select NA's or anything else which is not a number
+        if row['ageatdiagnosis'].isdigit():
+            if args.lower_age <= int(row['ageatdiagnosis']) <= args.upper_age:
+                bcs_rows.push(row['resid'])
+# Find hashes for selected research ID's
+with open(args.bcs_backlink, 'r') as bb):
+    reader = csv.DictReader(bb):
+    for row in reader:
+        use_hash = False
+        for resid in bcs_rows:
+            if resid == row['resid']:
+                outrows.push({'resid': resid, 'hash': row['hash']})
+with open(args.outfile if args.outfile else "request.txt", 'w') as f:
+    # Write back out the contents of our request
+    f.write('"resid","hash"\n')
+    for row in outrows:
+        f.write('"{}","{}"\n'.format(row['resid'], row['hash'])
+exit(0)
