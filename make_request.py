@@ -34,6 +34,16 @@ parser = argparse.ArgumentParser(
             description=desc
             )
 parser.add_argument("infile", help="Input request file.")
+parser.add_argument("lower_age",
+                    type=int,
+                    help="Low end of age range (inclusive).")
+parser.add_argument("upper_age",
+                    type=int,
+                    help="High end of age range (inclusive).")
+parser.add_argument("-o",
+                    "--outfile",
+                    type=str,
+                    help="Output request file name (default: request.txt).")
 args = parser.parse_args()
 
 if os.path.exists(args.infile):
