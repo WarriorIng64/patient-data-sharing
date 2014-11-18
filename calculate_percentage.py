@@ -51,7 +51,7 @@ with open(args.reply, 'r') as f:
     reader = csv.DictReader(f)
     for row in reader:
         total_rows += 1
-        if row['er'] == suite.NEGATIVE
+        if row['er'] == suite.NEGATIVE:
             if row['pgr'] == suite.NEGATIVE:
                 total_both_negative += 1
             else:
