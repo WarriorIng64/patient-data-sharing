@@ -25,7 +25,7 @@ import suite
 
 desc = suite.SUITE_NAME + "/calculate_percentage " + suite.SUITE_VERSION
 desc += """\nCalculates the percentage of selected patients who are negative
-\nfor both estrogen and progesterone receptors."""
+ for both estrogen and progesterone receptors."""
 
 #============================================================================
 # Main program code
@@ -38,10 +38,8 @@ parser = argparse.ArgumentParser(
 parser.add_argument("infile", help="Input reply file.")
 args = parser.parse_args()
 
-if os.path.exists(args.infile):
-    # Read in file contents
-    # TODO
-    exit(0)
-else
-    print "Error: {} does not exist".format(args.infile)
-    exit(1)
+suite.check_file_exists(args.infile)
+
+# TODO
+
+exit(0)

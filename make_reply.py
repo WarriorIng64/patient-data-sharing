@@ -25,7 +25,7 @@ import suite
 
 desc = suite.SUITE_NAME + "/make_reply " + suite.SUITE_VERSION
 desc += """\nMakes a reply file consisting of research IDs for the requested
-\n patients."""
+ patients."""
 
 #============================================================================
 # Main program code
@@ -38,10 +38,8 @@ parser = argparse.ArgumentParser(
 parser.add_argument("infile", help="Input request file.")
 args = parser.parse_args()
 
-if os.path.exists(args.infile):
-    # Read in file contents
-    # TODO
-    exit(0)
-else
-    print "Error: {} does not exist".format(args.infile)
-    exit(1)
+suite.check_file_exists(args.infile)
+
+# TODO
+
+exit(0)

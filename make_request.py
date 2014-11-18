@@ -26,7 +26,7 @@ import suite
 
 desc = suite.SUITE_NAME + "/make_request " + suite.SUITE_VERSION
 desc += """\nMakes a request file consisting of research IDs for the requested
-\n patients."""
+ patients."""
 
 #============================================================================
 # Main program code
