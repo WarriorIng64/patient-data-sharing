@@ -62,3 +62,4 @@ test/
 # Ignore default output filenames
 request.txt
 reply.txt
+percentage.txt
