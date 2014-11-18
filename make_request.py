@@ -74,7 +74,7 @@ with open(args.bcs_backlink, 'r') as bb:
         for resid in bcs_rows:
             if resid == row['resid']:
                 outrows.append({'resid': resid, 'hash': row['hash']})
-with open(args.outfile if args.outfile else "request.txt", 'w') as f:
+with open(args.outfile, 'w') as f:
     # Write back out the contents of our request
     f.write('"resid","hash"\n')
     for row in outrows:

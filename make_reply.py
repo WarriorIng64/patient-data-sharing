@@ -20,6 +20,8 @@
 # Last modified: 11/17/2014
 
 import argparse
+import csv
+import hashlib
 
 import suite
 
@@ -35,11 +37,63 @@ parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=desc
             )
-parser.add_argument("infile", help="Input request file.")
+parser.add_argument("request", help="Input request file.")
+parser.add_argument("master_backlink", help="Input master backlink file.")
+parser.add_argument("master_pathology", help="Input master pathology file.")
+parser.add_argument("-o",
+                    "--outfile",
+                    type=str,
+                    default="reply.txt",
+                    help="Output reply file name (default: reply.txt).")
 args = parser.parse_args()
 
-suite.check_file_exists(args.infile)
+suite.check_file_exists(args.request)
+suite.check_file_exists(args.master_backlink)
+suite.check_file_exists(args.master_pathology)
 
-# TODO
-
+# Read in request file.
+request_rows = []
+with open(args.request, 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        request_rows.append(row)
+# Locate matching patient ID's using SHA256 and record links
+links = []
+with open(args.master_backlink, 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        # Compute hash from patient ID and salt
+        source = row['patientid'] + row['salt']
+        computed_hash = hashlib.sha256(source).hexdigest()
+        for request_row in request_rows:
+            if request_row['hash'] == computed_hash:
+                links.append({'resid': request_row['resid'],
+                              'patientid': row['patientid']})
+# Get additional data from patient ID's and construct reply file
+pathology_data = []
+with open(args.master_pathology, 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        # See if patient ID's match, and record data if so
+        for link in links:
+            if link['patientid'] == row['patientid']:
+                # Merge dictionaries while excluding patient ID
+                data_dict = {key: value for key, value in 
+                             dict(link.items() + row.items()).items()
+                             if key != 'patientid'}
+                pathology_data.append(data_dict)
+with open(args.outfile, 'w') as f:
+    # Write back out the contents of our reply
+    f.write('"resid","grade","nodesexam","nodespos","extent","nodalstatus","size","pgr","er"\n')
+    for row in pathology_data:
+        f.write('"{}","{}","{}","{}","{}","{}","{}","{}","{}"\n'.format(
+                row['resid'],
+                row['grade'],
+                row['nodesexam'],
+                row['nodespos'],
+                row['extent'],
+                row['nodalstatus'],
+                row['size'],
+                row['pgr'],
+                row['er']]))
 exit(0)
