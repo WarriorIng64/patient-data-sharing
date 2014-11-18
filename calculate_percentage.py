@@ -78,7 +78,9 @@ any_negative_percentage = float(any_negative_total) / float(total_rows)
 not_negative_percentage = 1.0 - any_negative_percentage
 total_str = '{} total patients were examined.'.format(total_rows)
 er_str = are_negative_for(er_percentage, 'only estrogen receptors')
-pgr_str = are_negative_for(pgr_percentage, 'only progesterone receptors.')
+pgr_str = are_negative_for(pgr_percentage, 'only progesterone receptors')
+both_str = are_negative_for(both_percentage,
+                            'both estrogen and progesterone receptors')
 any_str = are_negative_for(any_negative_percentage,
                            'either estrogen or progesterone receptors, or both')
 not_str = are_negative_for(not_negative_percentage,
@@ -89,6 +91,7 @@ if args.outfile:
         f.write(total_str + '\n')
         f.write(er_str + '\n')
         f.write(pgr_str + '\n')
+        f.write(both_str + '\n')
         f.write(any_str + '\n')
         f.write(not_str + '\n')
 else:
@@ -96,6 +99,7 @@ else:
     print total_str
     print er_str
     print pgr_str
+    print both_str
     print any_str
     print not_str
 

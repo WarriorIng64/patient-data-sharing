@@ -17,12 +17,12 @@
 
 # MCS 5603 Intro to Bioinformatics, Fall 2014
 # Christopher Kyle Horton (000516274), chorton@ltu.edu
-# Last modified: 11/17/2014
+# Last modified: 11/18/2014
 
 import os
 
 SUITE_NAME = "patient-data-sharing"
-SUITE_VERSION = "v1.0.0"
+SUITE_VERSION = "v1.0.1"
 POSITIVE = 1
 NEGATIVE = 2
 BORDERLINE = 3

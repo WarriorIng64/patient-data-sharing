@@ -10,7 +10,7 @@ Test Run 2: make_request help message
 christopher@ArcticThunder:~/patient-data-sharing$ python make_request.py -h
 usage: make_request.py [-h] [-o OUTFILE] bcs bcs_backlink lower_age upper_age
 
-patient-data-sharing/make_request v1.0.0
+patient-data-sharing/make_request v1.0.1
 Makes a request file consisting of research IDs for the requested
  patients.
 
@@ -32,7 +32,7 @@ christopher@ArcticThunder:~/patient-data-sharing$ python make_reply.py -h
 usage: make_reply.py [-h] [-o OUTFILE]
                      request master_backlink master_pathology
 
-patient-data-sharing/make_reply v1.0.0
+patient-data-sharing/make_reply v1.0.1
 Makes a reply file consisting of research IDs for the requested
  patients.
 
@@ -52,7 +52,7 @@ Test Run 4: calculate_percentage help message
 christopher@ArcticThunder:~/patient-data-sharing$ python calculate_percentage.py -h
 usage: calculate_percentage.py [-h] [-o OUTFILE] reply
 
-patient-data-sharing/calculate_percentage v1.0.0
+patient-data-sharing/calculate_percentage v1.0.1
 Calculates the percentage of selected patients who are negative
  for both estrogen and progesterone receptors.
 
@@ -125,10 +125,11 @@ Contents of reply.txt:
 
 Test Run 7: Running calculate_percentage using previous output from Test Run 6
 ==============================================================================
-christopher@ArcticThunder:~/patient-data-sharing$ python calculate_percentage.py reply.txt
+christopher@ArcticThunder:~/patient-data-sharing$ python calculate_percentage.py reply.txt 
 21 total patients were examined.
 19.05% are negative for only estrogen receptors.
-9.52% are negative for only progesterone receptors..
+9.52% are negative for only progesterone receptors.
+14.29% are negative for both estrogen and progesterone receptors.
 42.86% are negative for either estrogen or progesterone receptors, or both.
 57.14% are negative for neither estrogen nor progesterone receptors.
 christopher@ArcticThunder:~/patient-data-sharing$ 
@@ -141,6 +142,7 @@ christopher@ArcticThunder:~/patient-data-sharing$
 Contents of percentages.txt:
 21 total patients were examined.
 19.05% are negative for only estrogen receptors.
-9.52% are negative for only progesterone receptors..
+9.52% are negative for only progesterone receptors.
+14.29% are negative for both estrogen and progesterone receptors.
 42.86% are negative for either estrogen or progesterone receptors, or both.
 57.14% are negative for neither estrogen nor progesterone receptors.
