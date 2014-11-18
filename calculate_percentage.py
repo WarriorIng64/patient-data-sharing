@@ -19,6 +19,8 @@
 # Christopher Kyle Horton (000516274), chorton@ltu.edu
 # Last modified: 11/17/2014
 
+import argparse
+
 import suite
 
 desc = suite.SUITE_NAME + "/calculate_percentage " + suite.SUITE_VERSION

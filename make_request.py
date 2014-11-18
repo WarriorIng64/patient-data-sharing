@@ -19,6 +19,9 @@
 # Christopher Kyle Horton (000516274), chorton@ltu.edu
 # Last modified: 11/17/2014
 
+import argparse
+import csv
+
 import suite
 
 desc = suite.SUITE_NAME + "/make_request " + suite.SUITE_VERSION
