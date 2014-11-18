@@ -51,23 +51,24 @@ with open(args.reply, 'r') as f:
     reader = csv.DictReader(f)
     for row in reader:
         total_rows += 1
-        if row['er'] == suite.NEGATIVE:
-            if row['pgr'] == suite.NEGATIVE:
+        if int(row['er']) == suite.NEGATIVE:
+            if int(row['pgr']) == suite.NEGATIVE:
                 total_both_negative += 1
             else:
                 total_er_negative += 1
-        else:
-            if row['pgr'] == suite.NEGATIVE:
-                total_pgr_negative += 1
+        elif int(row['pgr']) == suite.NEGATIVE:
+            total_pgr_negative += 1
 any_negative_total = total_both_negative + total_er_negative + total_pgr_negative
 both_percentage = float(total_both_negative) / float(total_rows)
 er_percentage = float(total_er_negative) / float(total_rows)
 pgr_percentage = float(total_pgr_negative) / float(total_rows)
 any_negative_percentage = float(any_negative_total) / float(total_rows)
+not_negative_percentage = 1.0 - any_negative_percentage
 print "{} total patients were examined for this calculation.".format(total_rows)
-print "{:.2%} of patients are negative for only estrogen receptors.".format(er_percentage)
-print "{:.2%} of patients are negative for only progesterone receptors.".format(pgr_percentage)
-print "{:.2%} of patients are negative for both estrogen and progesterone receptors.".format(both_percentage)
-print "{:.2%} of patients are not negative for both estrogen and progesterone receptors.".format(both_percentage)
+print "{:.2%} are negative for only estrogen receptors.".format(er_percentage)
+print "{:.2%} are negative for only progesterone receptors.".format(pgr_percentage)
+print "{:.2%} are negative for both estrogen and progesterone receptors.".format(both_percentage)
+print "{:.2%} are negative for either estrogen or progesterone receptors, or both.".format(any_negative_percentage)
+print "{:.2%} are negative for neither estrogen nor progesterone receptors.".format(not_negative_percentage)
 
 exit(0)
