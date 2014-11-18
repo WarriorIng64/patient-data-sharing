@@ -28,6 +28,11 @@ desc = suite.SUITE_NAME + "/calculate_percentage " + suite.SUITE_VERSION
 desc += """\nCalculates the percentage of selected patients who are negative
  for both estrogen and progesterone receptors."""
 
+def are_negative_for(percent, what):
+    '''Returns a formatted string for output, given what the percentage is
+    negative for and the percentage itself.'''
+    return '{:.2%} are negative for {}.'.format(percent, what)
+
 #============================================================================
 # Main program code
 #============================================================================
@@ -37,6 +42,10 @@ parser = argparse.ArgumentParser(
             description=desc
             )
 parser.add_argument("reply", help="Input reply file.")
+parser.add_argument("-o",
+                    "--outfile",
+                    type=str,
+                    help="Output file name. Use standard output if omitted.")
 args = parser.parse_args()
 
 suite.check_file_exists(args.reply)
@@ -64,11 +73,27 @@ er_percentage = float(total_er_negative) / float(total_rows)
 pgr_percentage = float(total_pgr_negative) / float(total_rows)
 any_negative_percentage = float(any_negative_total) / float(total_rows)
 not_negative_percentage = 1.0 - any_negative_percentage
-print "{} total patients were examined for this calculation.".format(total_rows)
-print "{:.2%} are negative for only estrogen receptors.".format(er_percentage)
-print "{:.2%} are negative for only progesterone receptors.".format(pgr_percentage)
-print "{:.2%} are negative for both estrogen and progesterone receptors.".format(both_percentage)
-print "{:.2%} are negative for either estrogen or progesterone receptors, or both.".format(any_negative_percentage)
-print "{:.2%} are negative for neither estrogen nor progesterone receptors.".format(not_negative_percentage)
+total_str = '{} total patients were examined.'.format(total_rows)
+er_str = are_negative_for(er_percentage, 'only estrogen receptors')
+pgr_str = are_negative_for(pgr_percentage, 'only progesterone receptors.')
+any_str = are_negative_for(any_negative_percentage,
+                           'either estrogen or progesterone receptors, or both')
+not_str = are_negative_for(not_negative_percentage,
+                           'neither estrogen nor progesterone receptors')
+if args.outfile:
+    # Write to file
+    with open(args.outfile, 'w') as f:
+        f.write(total_str + '\n')
+        f.write(er_str + '\n')
+        f.write(pgr_str + '\n')
+        f.write(any_str + '\n')
+        f.write(not_str + '\n')
+else:
+    # Print to standard output
+    print total_str
+    print er_str
+    print pgr_str
+    print any_str
+    print not_str
 
 exit(0)
