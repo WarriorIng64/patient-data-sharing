@@ -47,6 +47,7 @@ parser.add_argument("upper_age",
 parser.add_argument("-o",
                     "--outfile",
                     type=str,
+                    default="request.txt",
                     help="Output request file name (default: request.txt).")
 args = parser.parse_args()
 
@@ -64,18 +65,18 @@ with open(args.bcs, 'r') as b:
         # Don't select NA's or anything else which is not a number
         if row['ageatdiagnosis'].isdigit():
             if args.lower_age <= int(row['ageatdiagnosis']) <= args.upper_age:
-                bcs_rows.push(row['resid'])
+                bcs_rows.append(row['resid'])
 # Find hashes for selected research ID's
-with open(args.bcs_backlink, 'r') as bb):
-    reader = csv.DictReader(bb):
+with open(args.bcs_backlink, 'r') as bb:
+    reader = csv.DictReader(bb)
     for row in reader:
         use_hash = False
         for resid in bcs_rows:
             if resid == row['resid']:
-                outrows.push({'resid': resid, 'hash': row['hash']})
+                outrows.append({'resid': resid, 'hash': row['hash']})
 with open(args.outfile if args.outfile else "request.txt", 'w') as f:
     # Write back out the contents of our request
     f.write('"resid","hash"\n')
     for row in outrows:
-        f.write('"{}","{}"\n'.format(row['resid'], row['hash'])
+        f.write('"{}","{}"\n'.format(row['resid'], row['hash']))
 exit(0)

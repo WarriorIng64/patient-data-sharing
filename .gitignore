@@ -58,3 +58,7 @@ target/
 
 # Ignore testing folder
 test/
+
+# Ignore default output filenames
+request.txt
+reply.txt

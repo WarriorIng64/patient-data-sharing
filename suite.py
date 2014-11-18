@@ -24,7 +24,7 @@ import os
 SUITE_NAME = "patient-data-sharing"
 SUITE_VERSION = "v0.0.0"
 
-check_file_exists(path):
+def check_file_exists(path):
     '''Checks whether a file exists, and quits the program if not.'''
     if not os.path.exists(path):
         print "Error: {} does not exist".format(path)
