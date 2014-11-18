@@ -23,10 +23,6 @@ version = "v0.0.0"
 desc = "patient-data-sharing/calculate_percentage " + version
 desc += """\nCalculates the percentage of selected patients who are negative
 \nfor both estrogen and progesterone receptors."""
-infile_help="""
-Reads in the sequence from the given file path if the file exists.
-Otherwise, treats this as a sequence string to align.
-"""
 
 #============================================================================
 # Main program code
@@ -36,7 +32,7 @@ parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=desc
             )
-parser.add_argument("infile", help=infile_help)
+parser.add_argument("infile", help="Input reply file.")
 args = parser.parse_args()
 
 if os.path.exists(args.infile):

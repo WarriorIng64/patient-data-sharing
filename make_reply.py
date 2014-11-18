@@ -18,3 +18,27 @@
 # MCS 5603 Intro to Bioinformatics, Fall 2014
 # Christopher Kyle Horton (000516274), chorton@ltu.edu
 # Last modified: 11/17/2014
+
+version = "v0.0.0"
+desc = "patient-data-sharing/make_reply " + version
+desc += """\nMakes a reply file consisting of research IDs for the requested
+\n patients."""
+
+#============================================================================
+# Main program code
+#============================================================================
+
+parser = argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=desc
+            )
+parser.add_argument("infile", help="Input request file.")
+args = parser.parse_args()
+
+if os.path.exists(args.infile):
+    # Read in file contents
+    # TODO
+    exit(0)
+else
+    print "Error: {} does not exist".format(args.infile)
+    exit(1)
