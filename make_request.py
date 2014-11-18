@@ -74,6 +74,9 @@ with open(args.bcs_backlink, 'r') as bb:
         for resid in bcs_rows:
             if resid == row['resid']:
                 outrows.append({'resid': resid, 'hash': row['hash']})
+if len(outrows) < 1:
+    print "No research ID's found matching criteria."
+    exit(2)
 with open(args.outfile, 'w') as f:
     # Write back out the contents of our request
     f.write('"resid","hash"\n')

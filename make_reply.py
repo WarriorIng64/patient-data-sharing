@@ -82,6 +82,9 @@ with open(args.master_pathology, 'r') as f:
                              dict(link.items() + row.items()).items()
                              if key != 'patientid'}
                 pathology_data.append(data_dict)
+if len(pathology_data) < 1:
+    print "No data found for requested research ID's."
+    exit(2)
 with open(args.outfile, 'w') as f:
     # Write back out the contents of our reply
     f.write('"resid","grade","nodesexam","nodespos","extent","nodalstatus","size","pgr","er"\n')

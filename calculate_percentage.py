@@ -67,6 +67,9 @@ with open(args.reply, 'r') as f:
                 total_er_negative += 1
         elif int(row['pgr']) == suite.NEGATIVE:
             total_pgr_negative += 1
+if total_rows < 1:
+    print "No data found to analyze."
+    exit(2)
 any_negative_total = total_both_negative + total_er_negative + total_pgr_negative
 both_percentage = float(total_both_negative) / float(total_rows)
 er_percentage = float(total_er_negative) / float(total_rows)

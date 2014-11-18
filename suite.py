@@ -22,7 +22,7 @@
 import os
 
 SUITE_NAME = "patient-data-sharing"
-SUITE_VERSION = "v0.1.0"
+SUITE_VERSION = "v1.0.0"
 POSITIVE = 1
 NEGATIVE = 2
 BORDERLINE = 3

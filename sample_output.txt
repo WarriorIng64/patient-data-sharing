@@ -1,0 +1,68 @@
+Test Run 1: make_request without any arguments
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python make_request.py 
+usage: make_request.py [-h] [-o OUTFILE] bcs bcs_backlink lower_age upper_age
+make_request.py: error: too few arguments
+christopher@ArcticThunder:~/patient-data-sharing$ 
+
+Test Run 2: make_request help message
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python make_request.py -h
+usage: make_request.py [-h] [-o OUTFILE] bcs bcs_backlink lower_age upper_age
+
+patient-data-sharing/make_request v1.0.0
+Makes a request file consisting of research IDs for the requested
+ patients.
+
+positional arguments:
+  bcs                   Input bcs file.
+  bcs_backlink          Input bcs-backlink file.
+  lower_age             Low end of age range (inclusive).
+  upper_age             High end of age range (inclusive).
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTFILE, --outfile OUTFILE
+                        Output request file name (default: request.txt).
+christopher@ArcticThunder:~/patient-data-sharing$ 
+
+Test Run 3: make_reply help message
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python make_reply.py -h
+usage: make_reply.py [-h] [-o OUTFILE]
+                     request master_backlink master_pathology
+
+patient-data-sharing/make_reply v1.0.0
+Makes a reply file consisting of research IDs for the requested
+ patients.
+
+positional arguments:
+  request               Input request file.
+  master_backlink       Input master backlink file.
+  master_pathology      Input master pathology file.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTFILE, --outfile OUTFILE
+                        Output reply file name (default: reply.txt).
+christopher@ArcticThunder:~/patient-data-sharing$ 
+
+Test Run 4: calculate_percentage help message
+==============================================================================
+christopher@ArcticThunder:~/patient-data-sharing$ python calculate_percentage.py -h
+usage: calculate_percentage.py [-h] [-o OUTFILE] reply
+
+patient-data-sharing/calculate_percentage v1.0.0
+Calculates the percentage of selected patients who are negative
+ for both estrogen and progesterone receptors.
+
+positional arguments:
+  reply                 Input reply file.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTFILE, --outfile OUTFILE
+                        Output file name. Use standard output if omitted.
+christopher@ArcticThunder:~/patient-data-sharing$ 
+
+
