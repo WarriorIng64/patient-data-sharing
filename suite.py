@@ -18,28 +18,5 @@
 # MCS 5603 Intro to Bioinformatics, Fall 2014
 # Christopher Kyle Horton (000516274), chorton@ltu.edu
 # Last modified: 11/17/2014
-
-import suite
-
-desc = suite.SUITE_NAME + "/make_request " + suite.SUITE_VERSION
-desc += """\nMakes a request file consisting of research IDs for the requested
-\n patients."""
-
-#============================================================================
-# Main program code
-#============================================================================
-
-parser = argparse.ArgumentParser(
-            formatter_class=argparse.RawDescriptionHelpFormatter,
-            description=desc
-            )
-parser.add_argument("infile", help="Input request file.")
-args = parser.parse_args()
-
-if os.path.exists(args.infile):
-    # Read in file contents
-    # TODO
-    exit(0)
-else
-    print "Error: {} does not exist".format(args.infile)
-    exit(1)
+SUITE_NAME = "patient-data-sharing"
+SUITE_VERSION = "v0.0.0"

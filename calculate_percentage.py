@@ -19,8 +19,9 @@
 # Christopher Kyle Horton (000516274), chorton@ltu.edu
 # Last modified: 11/17/2014
 
-version = "v0.0.0"
-desc = "patient-data-sharing/calculate_percentage " + version
+import suite
+
+desc = suite.SUITE_NAME + "/calculate_percentage " + suite.SUITE_VERSION
 desc += """\nCalculates the percentage of selected patients who are negative
 \nfor both estrogen and progesterone receptors."""
 

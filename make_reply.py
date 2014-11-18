@@ -19,8 +19,9 @@
 # Christopher Kyle Horton (000516274), chorton@ltu.edu
 # Last modified: 11/17/2014
 
-version = "v0.0.0"
-desc = "patient-data-sharing/make_reply " + version
+import suite
+
+desc = suite.SUITE_NAME + "/make_reply " + suite.SUITE_VERSION
 desc += """\nMakes a reply file consisting of research IDs for the requested
 \n patients."""
 
